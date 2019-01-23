@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'noveo-login-component',
+  selector: 'noveo-login-dumb',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

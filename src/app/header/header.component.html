@@ -1,0 +1,15 @@
+<header class="noveo-header">
+  <a class="noveo-logo noveo-header__logo"
+    href="/"
+    routerLink="/">
+    <img class="noveo-logo__img"
+      src="assets/logo.svg" />
+  </a>
+  <div class="noveo-header__user-menu"
+    *ngIf="authenticated">
+    <button type="button"
+      (click)="onLogout()">
+      Log out
+    </button>
+  </div>
+</header>

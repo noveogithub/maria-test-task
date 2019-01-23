@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import * as fromStore from '../store';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(
     private store: Store<fromStore.State>,
     private authService: AuthService,
@@ -22,11 +22,11 @@ export class AuthGuard implements CanActivate {
 
     return this.authService.getAuthenticated().pipe(
       take(1),
-      tap((authenticated) => {
-        if (!authenticated) {
-          this.authService.logout();
-          this.store.dispatch(new fromStore.Go({ path: ['/login'] }));
+      map((authenticated) => {
+        if (authenticated) {
+          this.store.dispatch(new fromStore.Go({ path: ['/'] }));
         }
+        return !authenticated;
       }));
   }
 }

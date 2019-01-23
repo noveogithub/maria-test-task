@@ -14,8 +14,8 @@ export class CallsService {
     return this.http.get<Call[]>(`${environment.apiUrl}/api/calls`);
   }
 
-  loadCall(id: number) {
-    return this.http.get(`${environment.apiUrl}/api/calls/${id}`);
+  loadCall(id: string) {
+    return this.http.get<Call>(`${environment.apiUrl}/api/calls/${id}`);
   }
 
 }

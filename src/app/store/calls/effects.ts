@@ -13,12 +13,24 @@ export class CallsEffects {
   ) { }
 
   @Effect()
-  login$ = this.actions$.pipe(
+  loadCalls$ = this.actions$.pipe(
     ofType<fromCalls.LoadCalls>(fromCalls.LOAD_CALLS),
     switchMap(() => {
       return this.callsService.loadCalls().pipe(
         map(calls => new fromCalls.LoadCallsSuccess(calls)),
         catchError(error => of(new fromCalls.LoadCallsError(error))),
+      );
+    }),
+  );
+
+  @Effect()
+  loadCall$ = this.actions$.pipe(
+    ofType<fromCalls.LoadCall>(fromCalls.LOAD_CALL),
+    map(action => action.payload.id),
+    switchMap(id => {
+      return this.callsService.loadCall(id).pipe(
+        map(call => new fromCalls.LoadCallSuccess(call)),
+        catchError(error => of(new fromCalls.LoadCallError(error))),
       );
     }),
   );

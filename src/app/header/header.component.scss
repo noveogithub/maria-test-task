@@ -1,0 +1,42 @@
+@import '../../scss/config';
+
+:host {
+  display: block;
+  height: 80px;
+}
+
+.noveo-logo {
+  display: inline-block;
+  max-width: 11.25rem;
+
+  &__img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.noveo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  padding-left: 20px;
+  padding-right: 20px;
+  grid-gap: 20px;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-rows: 80px;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 0 0 8px 0 rgba(61,61,61,.3);
+  background-color: $white;
+
+  &__logo {
+    grid-column: 2 / span 1;
+  }
+
+  &__user-menu {
+    justify-self: right;
+  }
+}

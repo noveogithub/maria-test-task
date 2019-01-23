@@ -7,10 +7,10 @@ import { Call } from '../types';
 @Component({
   selector: 'noveo-calls',
   template: `
-    <noveo-calls-component
+    <noveo-calls-dumb
       [calls]="calls$ | async"
       [loading]="loading$ | async"
-    ></noveo-calls-component>
+    ></noveo-calls-dumb>
   `,
 })
 export class CallsContainerComponent implements OnInit {
@@ -19,7 +19,7 @@ export class CallsContainerComponent implements OnInit {
 
   constructor(private store: Store<fromStore.State>) {
     this.calls$ = this.store.select(fromStore.getCalls);
-    this.loading$ = this.store.select(fromStore.getCallsLoading);
+    this.loading$ = this.store.select(fromStore.getCallsLoadingAll);
   }
 
   ngOnInit() {

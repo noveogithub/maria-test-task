@@ -1,15 +1,13 @@
-import { AuthService } from '../../services/auth.service';
-import { Auth } from '../../types';
 import * as fromApp from './actions';
 
 export interface AppState {
   loading: boolean;
-  auth: Auth;
+  userId: string;
 }
 
 export const initialState: AppState = {
   loading: false,
-  auth: AuthService.getUser(),
+  userId: null,
 };
 
 export function appReducer(state = initialState, action: fromApp.AppActions): AppState {
@@ -30,7 +28,7 @@ export function appReducer(state = initialState, action: fromApp.AppActions): Ap
       return {
         ...state,
         loading: false,
-        auth: action.payload,
+        userId: action.payload.userId,
       };
     }
     default: {

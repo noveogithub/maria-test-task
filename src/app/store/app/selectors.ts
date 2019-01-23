@@ -3,12 +3,7 @@ import { AppState } from './reducer';
 
 export const getAppState = createFeatureSelector<AppState>('app');
 
-export const getAuth = createSelector(
+export const getUserId = createSelector(
   getAppState,
-  state => state.auth,
-)
-
-export const getToken = createSelector(
-  getAuth,
-  auth => auth ? auth.id : null,
+  state => state.userId,
 )

@@ -1,21 +1,23 @@
-<form [formGroup]="form">
-  <div>
-    <label for="username">User</label>
-    <input id="username"
-      type="text"
-      name="username"
-      formControlName="username">
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input id="password"
-      type="password"
-      name="password"
-      formControlName="password">
-  </div>
-  <button type="submit"
-    [disabled]="form.invalid"
-    (click)="$event.preventDefault(); onSubmit()">
-    Sign in
-  </button>
-</form>
+<div class="container">
+  <form [formGroup]="form">
+    <div>
+      <label for="username">User</label>
+      <input id="username"
+        type="text"
+        name="username"
+        formControlName="username">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password"
+        type="password"
+        name="password"
+        formControlName="password">
+    </div>
+    <button type="submit"
+      [disabled]="form.invalid"
+      (click)="$event.preventDefault(); onSubmit()">
+      Sign in
+    </button>
+  </form>
+</div>

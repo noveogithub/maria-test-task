@@ -1,0 +1,17 @@
+<div class="container">
+  <a href="/calls"
+    routerLink="../">Back</a>
+  <article>
+    <h1>{{ call?.callId }}</h1>
+
+    <div>Channel: {{ call?.channel }}</div>
+    <div>Start: {{ call?.callStart }}</div>
+    <div>End: {{ call?.callEnd }}</div>
+    <div>Duration: {{ call?.callDuration }}</div>
+    <div>Dialing: {{ call?.dialingDuration }}</div>
+    <div>Ivr: {{ call?.ivrDuration }}</div>
+    <div>Wait: {{ call?.waitDuration }}</div>
+    <div>Talk: {{ call?.talkDuration }}</div>
+
+  </article>
+</div>

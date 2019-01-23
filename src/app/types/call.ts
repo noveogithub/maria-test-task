@@ -1,3 +1,23 @@
+export interface CallAgent {
+  id: number;
+  login: string;
+}
+
+export interface CallWrapup {
+  agent: CallAgent;
+  wrapupId: number;
+  wrappedAt: string;
+  wrapupComment: string;
+  wrapupPath: string;
+  wrapupName: string[];
+  wrapupStatus: string;
+}
+
+export interface CallContact {
+  id: number;
+  phone: string;
+}
+
 export interface Call {
   callId: number;
   channel: string;
@@ -13,8 +33,8 @@ export interface Call {
   queue: string;
   campaign: string;
   service: string;
-  contact: any,
+  contact: CallContact,
   contactSessionId: string;
-  callWrapups: any[],
+  callWrapups: CallWrapup[],
   id: string;
 }

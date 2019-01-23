@@ -3,7 +3,9 @@ import { Call } from '../../types';
 import * as fromCalls from './actions';
 
 export interface CallsState extends EntityState<Call> {
-  loading: boolean;
+  loadingAll: boolean;
+  loading: { [id: string]: boolean };
+  saving: { [id: string]: boolean };
 }
 
 export const adapter: EntityAdapter<Call> =
@@ -12,7 +14,9 @@ export const adapter: EntityAdapter<Call> =
   });
 
 export const initialState: CallsState = adapter.getInitialState({
-  loading: false,
+  loadingAll: false,
+  loading: {},
+  saving: {},
 });
 
 export function callsReducer(state = initialState, action: fromCalls.CallsActions): CallsState {
@@ -20,20 +24,34 @@ export function callsReducer(state = initialState, action: fromCalls.CallsAction
     case fromCalls.LOAD_CALLS: {
       return {
         ...state,
-        loading: true,
+        loadingAll: true,
       };
     }
     case fromCalls.LOAD_CALLS_ERROR: {
       return {
         ...state,
-        loading: false,
+        loadingAll: false,
       };
     }
     case fromCalls.LOAD_CALLS_SUCCESS: {
-      return adapter.addAll(action.payload, { ...state, loading: false });
+      return adapter.addAll(action.payload, { ...state, loadingAll: false });
     }
     case fromCalls.CLEAR_CALLS: {
       return adapter.addAll([], { ...initialState });
+    }
+    case fromCalls.LOAD_CALL: {
+      return {
+        ...state,
+        loading: { ...state.loading, [action.payload.id]: true },
+      };
+    }
+    case fromCalls.LOAD_CALL_ERROR: {
+      return {
+        ...state,
+      };
+    }
+    case fromCalls.LOAD_CALL_SUCCESS: {
+      return adapter.addOne(action.payload, { ...state });
     }
     default: {
       return state;
@@ -41,4 +59,4 @@ export function callsReducer(state = initialState, action: fromCalls.CallsAction
   }
 }
 
-export const { selectAll } = adapter.getSelectors();
+export const { selectAll, selectEntities } = adapter.getSelectors();

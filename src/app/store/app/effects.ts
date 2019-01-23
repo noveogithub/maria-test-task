@@ -19,7 +19,7 @@ export class AppEffects {
     map(action => action.payload),
     switchMap(({ username, password }) => {
       return this.authService.authenticate(username, password).pipe(
-        tap((auth) => AuthService.login(auth)),
+        tap((auth) => this.authService.login(auth)),
         map((auth) => new fromApp.LoginSuccess(auth)),
         catchError(error => of(new fromApp.LoginError(error))),
       );
@@ -30,5 +30,12 @@ export class AppEffects {
   redirectOnLogin$ = this.actions$.pipe(
     ofType<fromApp.LoginSuccess>(fromApp.LOGIN_SUCCESS),
     map(() => new Go({ path: ['calls'] })),
+  );
+
+  @Effect()
+  logout$ = this.actions$.pipe(
+    ofType<fromApp.Logout>(fromApp.LOGOUT),
+    tap(() => this.authService.logout()),
+    map(() => new Go({ path: ['/login'] })),
   );
 }

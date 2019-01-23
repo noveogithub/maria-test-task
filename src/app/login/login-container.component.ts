@@ -5,7 +5,7 @@ import { Login, State } from '../store';
 @Component({
   selector: 'noveo-login',
   template: `
-    <noveo-login-component (submitted)="onSubmit($event)"></noveo-login-component>
+    <noveo-login-dumb (submitted)="onSubmit($event)"></noveo-login-dumb>
   `,
 })
 export class LoginContainerComponent implements OnInit {

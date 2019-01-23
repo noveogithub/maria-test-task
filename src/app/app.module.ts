@@ -8,12 +8,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CallProfileModule } from './call-profile/call-profile.module';
 import { CallsModule } from './calls/calls.module';
 import { AuthInterceptor } from './http';
 import { LoginModule } from './login/login.module';
 import { AuthService } from './services/auth.service';
 import { CallsService } from './services/calls.service';
 import { metaReducers, reducers, STORE_EFFECTS } from './store';
+import { HeaderModule } from './header/header.module';
 
 
 @NgModule({
@@ -24,8 +26,10 @@ import { metaReducers, reducers, STORE_EFFECTS } from './store';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    HeaderModule,
     LoginModule,
     CallsModule,
+    CallProfileModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
