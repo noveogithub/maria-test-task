@@ -1,0 +1,22 @@
+<article class="noveo-call-card">
+  <h1 class="title">
+    <a class="title title--link title--l"
+      href="/calls/{{call.id}}"
+      [routerLink]="call.id">
+      {{call.callId}}
+    </a>
+  </h1>
+  <div class="noveo-spacer noveo-spacer--s">
+    <div><strong>Start:</strong> {{call.callStart | dateParse:dateParseFormat:dateFormat }}</div>
+    <div><strong>Duration:</strong> {{call.callDuration | duration}}</div>
+    <div><strong>Agent:</strong> {{call.callWrapups[0]?.agent.login}}</div>
+    <div><strong>Wrapup Name:</strong> {{call.callWrapups[0]?.wrapupName}}</div>
+  </div>
+  <div class="noveo-call-card__footer">
+    <a class="noveo-btn noveo-btn--s"
+      href="/calls/{{call.id}}"
+      [routerLink]="call.id">
+      Show call details
+    </a>
+  </div>
+</article>

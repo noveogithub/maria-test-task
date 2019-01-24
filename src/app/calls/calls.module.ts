@@ -4,9 +4,10 @@ import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 import { CallsContainerComponent } from './calls-container.component';
 import { CallsComponent } from './calls.component';
+import { CallCardComponent } from './call-card/call-card.component';
 
 @NgModule({
-  declarations: [CallsComponent, CallsContainerComponent],
+  declarations: [CallsComponent, CallsContainerComponent, CallCardComponent],
   imports: [
     CommonModule,
     RouterModule,
