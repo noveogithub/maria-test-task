@@ -12,10 +12,47 @@ textarea {
   padding: 0.625rem 0;
   font-size: 1rem;
 
+  &.ng-touched.ng-invalid,
+  &.ng-dirty.ng-invalid {
+    border-color: $error;
+    border-bottom-width: 2px;
+  }
+
   &:focus {
     outline: none;
+  }
+
+  &:focus:not(:read-only) {
     border-color: $secondary;
   }
+}
+
+select {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $primary;
+  padding-left: 0.625rem;
+  padding-right: 1.625rem;
+  font-size: 1rem;
+
+  &.ng-touched.ng-invalid,
+  &.ng-dirty.ng-invalid {
+    border-color: $error;
+    border-bottom-width: 2px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus:not(:read-only) {
+    border-color: $secondary;
+  }
+}
+
+label {
+  font-weight: bold;
 }
 
 button, .noveo-btn {
@@ -38,6 +75,10 @@ button, .noveo-btn {
   }
 }
 
+button[disabled], .noveo-btn[disabled] {
+  opacity: 0.5;
+}
+
 .noveo-btn {
   &--m {
     font-size: 1.3125rem;
@@ -52,6 +93,11 @@ button, .noveo-btn {
     width: 100%;
     text-align: center;
   }
+}
+
+.noveo-form-error {
+  color: $error;
+  font-size: 0.875rem;
 }
 
 .noveo-form {

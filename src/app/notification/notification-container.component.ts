@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
-import { Notification } from '../types';
+import { NoveoNotification } from '../types';
 
 @Component({
   selector: 'noveo-notification',
@@ -15,9 +15,10 @@ import { Notification } from '../types';
     </div>
   `,
   styleUrls: ['./notification-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotificationContainerComponent {
-  notifications$: Observable<Notification[]>
+  notifications$: Observable<NoveoNotification[]>
 
   constructor(private store: Store<fromStore.NoveoState>) {
     this.notifications$ = this.store.select(fromStore.getNotifications);
@@ -27,7 +28,7 @@ export class NotificationContainerComponent {
     this.store.dispatch(new fromStore.DismissError(id));
   }
 
-  trackById(id: number, notification: Notification) {
+  trackById(id: number, notification: NoveoNotification) {
     return notification.id;
   }
 

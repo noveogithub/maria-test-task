@@ -1,8 +1,8 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Notification } from '../../types';
+import { NoveoNotification } from '../../types';
 import * as fromApp from './actions';
 
-export interface AppState extends EntityState<Notification> {
+export interface AppState extends EntityState<NoveoNotification> {
   auth: {
     loading: boolean;
     userId: string;
@@ -10,8 +10,8 @@ export interface AppState extends EntityState<Notification> {
   errorQueueId: number;
 }
 
-export const adapter: EntityAdapter<Notification> =
-  createEntityAdapter<Notification>({
+export const adapter: EntityAdapter<NoveoNotification> =
+  createEntityAdapter<NoveoNotification>({
     selectId: notification => notification.id,
   });
 

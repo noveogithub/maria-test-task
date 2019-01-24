@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
@@ -11,6 +11,7 @@ import * as fromStore from '../store';
       (submitted)="onSubmit($event)">
     </noveo-login-dumb>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginContainerComponent {
 

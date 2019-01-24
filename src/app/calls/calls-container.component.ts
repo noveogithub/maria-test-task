@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
@@ -13,6 +13,7 @@ import { Call } from '../types';
       [loading]="loading$ | async"
     ></noveo-calls-dumb>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CallsContainerComponent implements OnInit, OnDestroy {
   calls$: Observable<Call[]>;

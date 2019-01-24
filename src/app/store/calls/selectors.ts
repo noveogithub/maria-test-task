@@ -17,9 +17,19 @@ export const getCallsLoading = createSelector(
   state => state.loading,
 );
 
+export const getCallsSaving = createSelector(
+  getCallsState,
+  state => state.saving,
+);
+
 export const getCallLoading = createSelector(
   getCallsLoading,
   (loading, props = {}) => props.id ? !!loading[props.id] : false,
+);
+
+export const getCallSaving = createSelector(
+  getCallsSaving,
+  (saving, props = {}) => props.id ? !!saving[props.id] : false,
 );
 
 export const getCall = createSelector(
@@ -30,4 +40,14 @@ export const getCall = createSelector(
 export const getDateParseFormat = createSelector(
   getCallsState,
   state => state.dateParseFormat,
+);
+
+export const getUnsavedChanges = createSelector(
+  getCallsState,
+  state => state.unsavedChanges,
+);
+
+export const getEditable = createSelector(
+  getCallsState,
+  state => state.editable,
 );

@@ -1,0 +1,56 @@
+/* TODO: write proper grid system*/
+
+
+.row {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: -0.625rem;
+  margin-right: -0.625rem;
+
+  &--right {
+    justify-content: flex-end;
+  }
+}
+
+.column {
+  padding-left: 0.625rem;
+  padding-left: 0.625rem;
+  &--12 {
+    width: 100%;
+  }
+  &--11 {
+    width: 91.667%;
+  }
+  &--10 {
+    width: 83.333%;
+  }
+  &--9 {
+    width: 75%;
+  }
+  &--8 {
+    width: 66.667%;
+  }
+  &--7 {
+    width: 58.333%;
+  }
+  &--6 {
+    width: 50%;
+  }
+  &--5 {
+    width: 41.667%;
+  }
+  &--4 {
+    width: 33.333%;
+  }
+  &--3 {
+    width: 25%;
+  }
+  &--2 {
+    width: 16.667%;
+  }
+  &--1 {
+    width: 8.333%;
+  }
+}

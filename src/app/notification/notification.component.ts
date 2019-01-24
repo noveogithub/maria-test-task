@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
-import { Notification } from '../types';
+import { NoveoNotification } from '../types';
 
 @Component({
   selector: 'noveo-notification-dumb',
@@ -14,25 +14,26 @@ import { Notification } from '../types';
       })),
       transition('*<=>show', animate('1000ms')),
     ])
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotificationComponent implements OnDestroy, OnInit {
 
   @Output() dismiss: EventEmitter<string> = new EventEmitter();
 
-  @Input() duration = 100000000;
+  @Input() duration = 10000;
   @Input()
-  set notification(notification: Notification) {
+  set notification(notification: NoveoNotification) {
     this._notification = notification;
     this.message = this.extractMessage(notification.error, notification.error.message);
   };
-  get notification(): Notification {
+  get notification(): NoveoNotification {
     return this._notification;
   };
 
   currentState = 'show';
   message: string;
-  private _notification: Notification;
+  private _notification: NoveoNotification;
   private subscription = new Subscription();
 
 

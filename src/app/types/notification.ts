@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-export interface Notification {
+export interface NoveoNotification {
   id: string;
   error: HttpErrorResponse;
 }

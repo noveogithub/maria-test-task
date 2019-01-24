@@ -12,11 +12,13 @@
     <div><strong>Agent:</strong> {{call.callWrapups[0]?.agent.login}}</div>
     <div><strong>Wrapup Name:</strong> {{call.callWrapups[0]?.wrapupName}}</div>
   </div>
-  <div class="noveo-call-card__footer">
-    <a class="noveo-btn noveo-btn--s"
-      href="/calls/{{call.id}}"
-      [routerLink]="call.id">
-      Show call details
-    </a>
+  <div class="row row--right">
+    <div class="column">
+      <a class="noveo-btn noveo-btn--s"
+        href="/calls/{{call.id}}"
+        [routerLink]="call.id">
+        Show call details
+      </a>
+    </div>
   </div>
 </article>

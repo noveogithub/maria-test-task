@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Call } from 'src/app/types';
 
 @Component({
   selector: 'noveo-call-card',
   templateUrl: './call-card.component.html',
-  styleUrls: ['./call-card.component.scss']
+  styleUrls: ['./call-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CallCardComponent {
   @Input() call: Call;

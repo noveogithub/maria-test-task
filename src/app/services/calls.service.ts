@@ -18,4 +18,8 @@ export class CallsService {
     return this.http.get<Call>(`${environment.apiUrl}/api/calls/${id}`);
   }
 
+  saveCall(call: Call) {
+    return this.http.put<Call>(`${environment.apiUrl}/api/calls/${call.id}`, call);
+  }
+
 }

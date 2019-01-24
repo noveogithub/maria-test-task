@@ -19,8 +19,14 @@
     <div><strong>Wait:</strong> {{ call?.waitDuration | duration }}</div>
     <div><strong>Talk:</strong> {{ call?.talkDuration | duration }}</div>
 
-    <h2 class="title title--s noveo-spacer noveo-spacer--top-s">Wrapups</h2>
-    <ul *ngIf="call"
+    <h2 class="title title--s noveo-spacer noveo-spacer--top-s">Wrapups
+      <button type="button"
+        (click)="onEdit()"
+        *ngIf="!editable">
+        Edit
+      </button>
+    </h2>
+    <ul *ngIf="call && !editable"
       class="noveo-call__wrapup">
       <li *ngFor="let wrapup of call.callWrapups">
         <div><strong>Wrapup Id:</strong> {{wrapup.wrapupId}}</div>
@@ -28,6 +34,73 @@
         <div><strong>Wrapup Comment:</strong> {{wrapup.wrapupComment}}</div>
       </li>
     </ul>
+
+    <form class="noveo-call__form"
+      [formGroup]="form"
+      (submit)="$event.preventDefault(); onSave();"
+      *ngIf="editable">
+      <div class="noveo-spacer noveo-spacer--bottom-s"
+        formArrayName="callWrapups"
+        *ngFor="let wrapup of callWrapups.controls; let i = index;">
+        <div [formGroupName]="i">
+          <div class="noveo-spacer noveo-spacer--bottom-s">
+            <div>
+              <label for="wrapup_{{i}}_wrapupId">Wrapup Id</label>
+            </div>
+            <input type="text"
+              readonly
+              id="wrapup_{{i}}_wrapupId"
+              name="wrapup_{{i}}_wrapupId"
+              formControlName="wrapupId">
+          </div>
+          <div class="noveo-spacer noveo-spacer--bottom-s">
+            <div>
+              <label for="wrapup_{{i}}_wrapupName">Wrapup Name</label>
+            </div>
+            <input id="wrapup_{{i}}_wrapupName"
+              type="text"
+              name="wrapup_{{i}}_wrapupName"
+              formControlName="wrapupName">
+            <p class="noveo-form-error"
+              *ngIf="callWrapups.controls[i].controls.wrapupName.invalid && callWrapups.controls[i].controls.wrapupName.dirty">
+              This field is required
+            </p>
+          </div>
+          <div class="noveo-spacer noveo-spacer--bottom-s">
+            <div>
+              <label for="wrapup_{{i}}_wrapupComment">Wrapup Comment</label>
+            </div>
+            <input id="wrapup_{{i}}_wrapupComment"
+              type="text"
+              name="wrapup_{{i}}_wrapupComment"
+              formControlName="wrapupComment">
+            <p class="noveo-form-error"
+              *ngIf="callWrapups.controls[i].controls.wrapupComment.invalid && callWrapups.controls[i].controls.wrapupComment.dirty">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row--right">
+        <div class="column">
+          <button class="noveo-call__form-btn"
+            type="button"
+            (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+        <div class="column">
+          <button class="noveo-call__form-btn"
+            type="submit"
+            [disabled]="!form.valid || saving || !unsavedChanges">
+            <ng-container *ngIf="!saving">Save</ng-container>
+            <div *ngIf="saving"
+              class="noveo-loader noveo-loader--theme-white noveo-loader--s"></div>
+          </button>
+        </div>
+      </div>
+    </form>
 
   </article>
 </div>

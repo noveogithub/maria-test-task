@@ -37,6 +37,18 @@ export class CallsEffects {
   );
 
   @Effect()
+  saveCall$ = this.actions$.pipe(
+    ofType<fromCalls.SaveCall>(fromCalls.SAVE_CALL),
+    map(action => action.payload),
+    switchMap(call => {
+      return this.callsService.saveCall(call).pipe(
+        map(savedCall => new fromCalls.SaveCallSuccess(savedCall)),
+        catchError(error => of(new fromCalls.SaveCallError({ error, id: call.id }))),
+      );
+    }),
+  );
+
+  @Effect()
   setError$ = this.actions$.pipe(
     ofType<fromCalls.LoadCallsError>(fromCalls.LOAD_CALLS_ERROR),
     map(action => new fromApp.SetError(action.payload)),
@@ -44,7 +56,7 @@ export class CallsEffects {
 
   @Effect()
   setCallError$ = this.actions$.pipe(
-    ofType<fromCalls.LoadCallError>(fromCalls.LOAD_CALL_ERROR),
+    ofType<fromCalls.LoadCallError | fromCalls.SaveCallError>(fromCalls.LOAD_CALL_ERROR, fromCalls.SAVE_CALL_ERROR),
     map(action => new fromApp.SetError(action.payload.error)),
   );
 }
