@@ -3,11 +3,13 @@
 html {
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
 }
 
 a {
   color: $secondary;
   text-decoration: none;
+  transition: all .3s ease;
   &:focus,
   &:hover {
     color: darken($secondary, 20%);
@@ -17,22 +19,53 @@ a {
   }
 }
 
-h1, .title-xl {
-  color: $primary;
+.title {
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  &--link {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: $secondary;
+    }
+  }
 }
 
-h2, .title-l {
+h1, .title--xl,
+h2, .title--l,
+h3, .title--m,
+h4, .title--s,
+h5, .title--xs {
+  margin-top: 0;
   color: $primary;
+  line-height: 1.2em;
 }
 
-h3, .title-m {
-  color: $primary;
+h1, .title--xl {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
 }
 
-h4, .title-s {
-  color: $primary;
+h2, .title--l {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
 }
 
-h5, .title-xs {
+h3, .title--m {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h4, .title--s {
+  font-size: 1.375rem;
+  margin-bottom: 0.8rem;
+}
+
+h5, .title--xs {
   color: $primary;
+  line-height: 1.2em;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
 }

@@ -1,3 +1,5 @@
+@import "../../scss/config.scss";
+
 .noveo-calls {
   &__list {
     list-style: none;
@@ -6,5 +8,10 @@
   }
   &__list-item {
     margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid $gray;
+  }
+  &__item-footer {
+    text-align: right;
   }
 }

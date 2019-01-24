@@ -6,6 +6,7 @@ export const LOGIN = '[App] Login request';
 export const LOGIN_SUCCESS = '[App] Login success';
 export const LOGIN_ERROR = '[App] Login error';
 export const LOGOUT = '[App] Logout request';
+export const SET_ERROR = '[App] Set error';
 
 export class Login implements Action {
   readonly type = LOGIN;
@@ -26,4 +27,9 @@ export class Logout implements Action {
   readonly type = LOGOUT;
 }
 
-export type AppActions = Login | LoginSuccess | LoginError;
+export class SetError implements Action {
+  readonly type = SET_ERROR;
+  constructor(public payload: HttpErrorResponse) { }
+}
+
+export type AppActions = Login | LoginSuccess | LoginError | Logout | SetError;

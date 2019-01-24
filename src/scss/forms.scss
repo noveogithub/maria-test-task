@@ -1,0 +1,61 @@
+@import 'config';
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+textarea {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $primary;
+  padding: 0.625rem 0;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: $secondary;
+  }
+}
+
+button, .noveo-btn {
+  -webkit-appearance: none;
+  display: inline-block;
+  padding: 0.625rem;
+  border-radius: 0;
+  border: none;
+  font-size: 1rem;
+  background: $primary;
+  color: $white;
+  transition: all .3s ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $secondary;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.noveo-btn {
+  &--m {
+    font-size: 1.3125rem;
+    padding: 0.9375rem;
+  }
+  &--s {
+    font-size: 1rem;
+    padding: 0.625rem;
+  }
+  &--block {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.noveo-form {
+  &__row {
+    margin-bottom: 1.625rem;
+  }
+}

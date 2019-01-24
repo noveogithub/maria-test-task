@@ -8,5 +8,7 @@ import { Call } from '../types';
 })
 export class CallsComponent {
   @Input() calls: Call[] = [];
+  @Input() dateFormat = 'MMM d, y, HH:mm:ss';
+  @Input() dateParseFormat: string;
   @Input() loading: boolean;
 }

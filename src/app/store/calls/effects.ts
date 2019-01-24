@@ -3,6 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { CallsService } from 'src/app/services/calls.service';
+import * as fromApp from '../app';
 import * as fromCalls from './actions';
 
 @Injectable()
@@ -30,8 +31,20 @@ export class CallsEffects {
     switchMap(id => {
       return this.callsService.loadCall(id).pipe(
         map(call => new fromCalls.LoadCallSuccess(call)),
-        catchError(error => of(new fromCalls.LoadCallError(error))),
+        catchError(error => of(new fromCalls.LoadCallError({ error, id }))),
       );
     }),
+  );
+
+  @Effect()
+  setError$ = this.actions$.pipe(
+    ofType<fromCalls.LoadCallsError>(fromCalls.LOAD_CALLS_ERROR),
+    map(action => new fromApp.SetError(action.payload)),
+  );
+
+  @Effect()
+  setCallError$ = this.actions$.pipe(
+    ofType<fromCalls.LoadCallError>(fromCalls.LOAD_CALLS_ERROR),
+    map(action => new fromApp.SetError(action.payload.error)),
   );
 }

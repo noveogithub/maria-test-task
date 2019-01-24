@@ -1,17 +1,33 @@
-<div class="container">
-  <a href="/calls"
-    routerLink="../">Back</a>
-  <article>
+<div class="container noveo-call noveo-spacer noveo-spacer--bottom-m noveo-spacer--top-s">
+  <div class="noveo-spacer noveo-spacer--bottom-s">
+    <a href="/calls"
+      routerLink="../"><strong>&lt; Back to calls list</strong></a>
+  </div>
+
+  <div class="noveo-loader noveo-loader--theme-secondary noveo-loader--l"
+    *ngIf="loading"></div>
+
+  <article *ngIf="!loading">
     <h1>{{ call?.callId }}</h1>
 
-    <div>Channel: {{ call?.channel }}</div>
-    <div>Start: {{ call?.callStart }}</div>
-    <div>End: {{ call?.callEnd }}</div>
-    <div>Duration: {{ call?.callDuration }}</div>
-    <div>Dialing: {{ call?.dialingDuration }}</div>
-    <div>Ivr: {{ call?.ivrDuration }}</div>
-    <div>Wait: {{ call?.waitDuration }}</div>
-    <div>Talk: {{ call?.talkDuration }}</div>
+    <div><strong>Channel:</strong> {{ call?.channel }}</div>
+    <div><strong>Start:</strong> {{ call?.callStart | dateParse:dateParseFormat:dateFormat }}</div>
+    <div><strong>End:</strong> {{ call?.callEnd | dateParse:dateParseFormat:dateFormat }}</div>
+    <div><strong>Duration:</strong> {{ call?.callDuration | duration }}</div>
+    <div><strong>Dialing:</strong> {{ call?.dialingDuration | duration }}</div>
+    <div><strong>Ivr:</strong> {{ call?.ivrDuration | duration }}</div>
+    <div><strong>Wait:</strong> {{ call?.waitDuration | duration }}</div>
+    <div><strong>Talk:</strong> {{ call?.talkDuration | duration }}</div>
+
+    <h2 class="title title--s noveo-spacer noveo-spacer--top-s">Wrapup</h2>
+    <ul *ngIf="call"
+      class="noveo-call__wrapup">
+      <li *ngFor="let wrapup of call.callWrapups">
+        <div><strong>Wrapup Id:</strong> {{wrapup.wrapupId}}</div>
+        <div><strong>Wrapup Name:</strong> {{wrapup.wrapupName}}</div>
+        <div><strong>Wrapup Comment:</strong> {{wrapup.wrapupComment}}</div>
+      </li>
+    </ul>
 
   </article>
 </div>

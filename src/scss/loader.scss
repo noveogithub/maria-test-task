@@ -1,0 +1,62 @@
+@import 'config';
+
+
+@keyframes loader-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.noveo-loader {
+  display: inline-block;
+
+  &:after {
+    content: " ";
+    display: block;
+    margin: 1px;
+    border-radius: 50%;
+    border: 0.3125rem solid transparent;
+    animation: loader-animation 1.2s linear infinite;
+  }
+
+  &--theme-secondary {
+    &:after {
+      border-color: $secondary transparent $secondary transparent;
+    }
+  }
+  &--theme-white {
+    &:after {
+      border-color: $white transparent $white transparent;
+    }
+  }
+
+  &--l {
+    width: 4.625rem;
+    height: 4.625rem;
+    &:after {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+  &--m {
+    width: 2.575rem;
+    height: 2.575rem;
+    &:after {
+      width: 2rem;
+      height: 2rem;
+      border-width: 0.2875rem;
+    }
+  }
+  &--s {
+    width: 1.5rem;
+    height: 1.5rem;
+    &:after {
+      width: 1rem;
+      height: 1rem;
+      border-width: 0.25rem;
+    }
+  }
+}

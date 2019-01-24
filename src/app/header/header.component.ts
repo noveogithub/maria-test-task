@@ -10,6 +10,7 @@ export class HeaderComponent {
   @Output() logout: EventEmitter<void> = new EventEmitter();
 
   @Input() authenticated: boolean;
+  @Input() user: string;
 
   onLogout() {
     this.logout.emit();

@@ -26,3 +26,8 @@ export const getCall = createSelector(
   getCallsEntities,
   (entities, props = {}) => props.id ? entities[props.id] : null,
 );
+
+export const getDateParseFormat = createSelector(
+  getCallsState,
+  state => state.dateParseFormat,
+);

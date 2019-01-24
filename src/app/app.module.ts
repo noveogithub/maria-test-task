@@ -10,17 +10,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CallProfileModule } from './call-profile/call-profile.module';
 import { CallsModule } from './calls/calls.module';
+import { HeaderModule } from './header/header.module';
 import { AuthInterceptor } from './http';
 import { LoginModule } from './login/login.module';
 import { AuthService } from './services/auth.service';
 import { CallsService } from './services/calls.service';
 import { metaReducers, reducers, STORE_EFFECTS } from './store';
-import { HeaderModule } from './header/header.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

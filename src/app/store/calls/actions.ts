@@ -40,11 +40,12 @@ export class LoadCallSuccess implements Action {
 
 export class LoadCallError implements Action {
   readonly type = LOAD_CALL_ERROR;
-  constructor(public payload: HttpErrorResponse) { }
+  constructor(public payload: { error: HttpErrorResponse, id: string }) { }
 }
 
 export class ClearCall implements Action {
-  readonly type = CLEAR_CALLS;
+  readonly type = CLEAR_CALL;
+  constructor(public payload: { id: string }) { }
 }
 
 export type CallsActions = LoadCalls

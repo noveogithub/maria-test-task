@@ -1,23 +1,31 @@
-<div class="container">
-  <form [formGroup]="form">
-    <div>
-      <label for="username">User</label>
+<div class="container noveo-login noveo-spacer noveo-spacer--l">
+  <form class="noveo-login__form noveo-form"
+    [formGroup]="form"
+    (submit)="$event.preventDefault(); onSubmit()">
+    <div class="noveo-form__row">
+      <div>
+        <label for="username">User</label>
+      </div>
       <input id="username"
         type="text"
         name="username"
         formControlName="username">
     </div>
-    <div>
-      <label for="password">Password</label>
+    <div class="noveo-form__row">
+      <div>
+        <label for="password">Password</label>
+      </div>
       <input id="password"
         type="password"
         name="password"
         formControlName="password">
     </div>
-    <button type="submit"
-      [disabled]="form.invalid"
-      (click)="$event.preventDefault(); onSubmit()">
-      Sign in
+    <button class="noveo-btn noveo-btn--block noveo-btn--m"
+      type="submit"
+      [disabled]="form.invalid || loading">
+      <ng-container *ngIf="!loading">Sign in</ng-container>
+      <div *ngIf="loading"
+        class="noveo-loader noveo-loader--theme-white noveo-loader--s"></div>
     </button>
   </form>
 </div>

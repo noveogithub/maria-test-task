@@ -1,0 +1,38 @@
+$large: 4rem;
+$medium: 2rem;
+$small: 1rem;
+
+.noveo-spacer {
+  &--l {
+    margin-top: $large;
+    margin-bottom: $large;
+  }
+  &--top-l {
+    margin-top: $large;
+  }
+  &--bottom-l {
+    margin-bottom: $large;
+  }
+
+  &--m {
+    margin-top: $medium;
+    margin-bottom: $medium;
+  }
+  &--top-m {
+    margin-top: $medium;
+  }
+  &--bottom-m {
+    margin-bottom: $medium;
+  }
+
+  &--s {
+    margin-top: $small;
+    margin-bottom: $small;
+  }
+  &--top-s {
+    margin-top: $small;
+  }
+  &--bottom-s {
+    margin-bottom: $small;
+  }
+}

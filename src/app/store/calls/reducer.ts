@@ -6,6 +6,7 @@ export interface CallsState extends EntityState<Call> {
   loadingAll: boolean;
   loading: { [id: string]: boolean };
   saving: { [id: string]: boolean };
+  dateParseFormat: string;
 }
 
 export const adapter: EntityAdapter<Call> =
@@ -17,6 +18,7 @@ export const initialState: CallsState = adapter.getInitialState({
   loadingAll: false,
   loading: {},
   saving: {},
+  dateParseFormat: 'DD/MM/YYYY HH:mm:ss',
 });
 
 export function callsReducer(state = initialState, action: fromCalls.CallsActions): CallsState {
@@ -37,7 +39,7 @@ export function callsReducer(state = initialState, action: fromCalls.CallsAction
       return adapter.addAll(action.payload, { ...state, loadingAll: false });
     }
     case fromCalls.CLEAR_CALLS: {
-      return adapter.addAll([], { ...initialState });
+      return adapter.addAll([], { ...state, loadingAll: initialState.loadingAll });
     }
     case fromCalls.LOAD_CALL: {
       return {
@@ -48,10 +50,18 @@ export function callsReducer(state = initialState, action: fromCalls.CallsAction
     case fromCalls.LOAD_CALL_ERROR: {
       return {
         ...state,
+        loading: { ...state.loading, [action.payload.id]: false },
       };
     }
     case fromCalls.LOAD_CALL_SUCCESS: {
-      return adapter.addOne(action.payload, { ...state });
+      return adapter.addOne(action.payload, {
+        ...state,
+        loading: { ...state.loading, [action.payload.id]: false },
+      });
+    }
+    case fromCalls.CLEAR_CALL: {
+      const { [action.payload.id]: _, ...loading } = state.loading;
+      return adapter.removeOne(action.payload.id, { ...state, loading });
     }
     default: {
       return state;

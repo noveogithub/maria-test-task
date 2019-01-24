@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Call } from '../types';
 
 @Component({
@@ -6,13 +6,9 @@ import { Call } from '../types';
   templateUrl: './call-profile.component.html',
   styleUrls: ['./call-profile.component.scss']
 })
-export class CallProfileComponent implements OnInit {
+export class CallProfileComponent {
   @Input() call: Call;
+  @Input() dateFormat = 'MMM d, y, HH:mm:ss';
+  @Input() dateParseFormat: string;
   @Input() loading: boolean;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

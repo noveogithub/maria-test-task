@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromStore from '../store';
 import { Login, State } from '../store';
 
 @Component({
   selector: 'noveo-login',
   template: `
-    <noveo-login-dumb (submitted)="onSubmit($event)"></noveo-login-dumb>
+    <noveo-login-dumb
+      [loading]="loading$ | async"
+      (submitted)="onSubmit($event)">
+    </noveo-login-dumb>
   `,
 })
-export class LoginContainerComponent implements OnInit {
+export class LoginContainerComponent {
 
-  constructor(private store: Store<State>) { }
+  loading$: Observable<boolean>;
 
-  ngOnInit() {
+  constructor(private store: Store<State>) {
+    this.loading$ = this.store.select(fromStore.getAuthLoading);
   }
 
   onSubmit({ username, password }: { username: string, password: string }) {

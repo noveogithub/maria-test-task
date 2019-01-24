@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { Go } from '../router';
 import * as fromApp from './actions';
@@ -12,6 +12,13 @@ export class AppEffects {
     private actions$: Actions,
     private authService: AuthService,
   ) { }
+
+  @Effect()
+  $initial = of(null).pipe(
+    switchMap(() => this.authService.getAuth()),
+    take(1),
+    map(auth => new fromApp.LoginSuccess(auth)),
+  );
 
   @Effect()
   login$ = this.actions$.pipe(
@@ -36,6 +43,20 @@ export class AppEffects {
   logout$ = this.actions$.pipe(
     ofType<fromApp.Logout>(fromApp.LOGOUT),
     tap(() => this.authService.logout()),
+    map(() => new Go({ path: ['/login'] })),
+  );
+
+  @Effect()
+  setError$ = this.actions$.pipe(
+    ofType<fromApp.LoginError>(fromApp.LOGIN_ERROR),
+    map(action => new fromApp.SetError(action.payload)),
+  );
+
+  @Effect()
+  errorRedirect$ = this.actions$.pipe(
+    ofType<fromApp.SetError>(fromApp.SET_ERROR),
+    map(action => action.payload),
+    filter(error => error.status === 401),
     map(() => new Go({ path: ['/login'] })),
   );
 }
