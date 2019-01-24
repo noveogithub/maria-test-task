@@ -12,7 +12,9 @@ import { CallProfileModule } from './call-profile/call-profile.module';
 import { CallsModule } from './calls/calls.module';
 import { HeaderModule } from './header/header.module';
 import { AuthInterceptor } from './http';
+import { ResponseInterceptor } from './http/response.interceptor';
 import { LoginModule } from './login/login.module';
+import { NotificationModule } from './notification/notification.module';
 import { AuthService } from './services/auth.service';
 import { CallsService } from './services/calls.service';
 import { metaReducers, reducers, STORE_EFFECTS } from './store';
@@ -30,6 +32,7 @@ import { metaReducers, reducers, STORE_EFFECTS } from './store';
     LoginModule,
     CallsModule,
     CallProfileModule,
+    NotificationModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router',
@@ -44,6 +47,7 @@ import { metaReducers, reducers, STORE_EFFECTS } from './store';
     AuthService,
     CallsService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

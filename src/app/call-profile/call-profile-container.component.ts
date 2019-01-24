@@ -24,7 +24,7 @@ export class CallProfileContainerComponent implements OnInit, OnDestroy {
     return this.route.snapshot.params.callId;
   }
 
-  constructor(private route: ActivatedRoute, private store: Store<fromStore.State>) {
+  constructor(private route: ActivatedRoute, private store: Store<fromStore.NoveoState>) {
     this.call$ = this.store.select(fromStore.getCall, { id: this.callId });
     this.dateParseFormat$ = this.store.select(fromStore.getDateParseFormat);
     this.loading$ = this.store.select(fromStore.getCallLoading, { id: this.callId });

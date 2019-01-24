@@ -1,6 +1,7 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { mergeMap, take } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return this.authService.getToken().pipe(
       take(1),
       mergeMap(token => next.handle(
-        !!token
+        !!token && req.url.indexOf(environment.apiUrl) >= 0
           ? req.clone({ setHeaders: { Authorization: token } })
           : req
       )),

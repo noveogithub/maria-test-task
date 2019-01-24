@@ -11,7 +11,7 @@ import * as fromStore from '../store';
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private store: Store<fromStore.State>,
+    private store: Store<fromStore.NoveoState>,
     private authService: AuthService,
   ) { }
 

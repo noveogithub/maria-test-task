@@ -44,7 +44,7 @@ export class CallsEffects {
 
   @Effect()
   setCallError$ = this.actions$.pipe(
-    ofType<fromCalls.LoadCallError>(fromCalls.LOAD_CALLS_ERROR),
+    ofType<fromCalls.LoadCallError>(fromCalls.LOAD_CALL_ERROR),
     map(action => new fromApp.SetError(action.payload.error)),
   );
 }

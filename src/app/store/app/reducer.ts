@@ -1,21 +1,27 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Notification } from '../../types';
 import * as fromApp from './actions';
 
-export interface AppState {
+export interface AppState extends EntityState<Notification> {
   auth: {
     loading: boolean;
     userId: string;
   }
-  error: HttpErrorResponse;
+  errorQueueId: number;
 }
 
-export const initialState: AppState = {
+export const adapter: EntityAdapter<Notification> =
+  createEntityAdapter<Notification>({
+    selectId: notification => notification.id,
+  });
+
+export const initialState: AppState = adapter.getInitialState({
   auth: {
     loading: false,
     userId: null,
   },
-  error: null,
-};
+  errorQueueId: 0,
+});
 
 export function appReducer(state = initialState, action: fromApp.AppActions): AppState {
   switch (action.type) {
@@ -32,9 +38,10 @@ export function appReducer(state = initialState, action: fromApp.AppActions): Ap
       };
     }
     case fromApp.LOGIN_SUCCESS: {
+      const userId = action.payload ? action.payload.userId : null;
       return {
         ...state,
-        auth: { userId: action.payload.userId, loading: false },
+        auth: { userId, loading: false },
       };
     }
     case fromApp.LOGOUT: {
@@ -44,13 +51,24 @@ export function appReducer(state = initialState, action: fromApp.AppActions): Ap
       };
     }
     case fromApp.SET_ERROR: {
-      return {
-        ...state,
-        error: action.payload,
-      };
+      return adapter.addOne(
+        {
+          id: String(state.errorQueueId),
+          error: action.payload,
+        },
+        {
+          ...state,
+          errorQueueId: (state.errorQueueId + 1) % Number.MAX_VALUE,
+        },
+      );
+    }
+    case fromApp.DISMISS_ERROR: {
+      return adapter.removeOne(action.payload, state);
     }
     default: {
       return state;
     }
   }
 }
+
+export const { selectAll, selectEntities } = adapter.getSelectors();

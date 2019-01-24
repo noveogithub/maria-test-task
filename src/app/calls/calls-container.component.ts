@@ -19,7 +19,7 @@ export class CallsContainerComponent implements OnInit, OnDestroy {
   dateParseFormat$: Observable<string>;
   loading$: Observable<boolean>;
 
-  constructor(private store: Store<fromStore.State>) {
+  constructor(private store: Store<fromStore.NoveoState>) {
     this.calls$ = this.store.select(fromStore.getCalls);
     this.dateParseFormat$ = this.store.select(fromStore.getDateParseFormat);
     this.loading$ = this.store.select(fromStore.getCallsLoadingAll);

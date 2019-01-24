@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { Go } from '../router';
 import * as fromApp from './actions';
@@ -25,8 +25,8 @@ export class AppEffects {
     ofType<fromApp.Login>(fromApp.LOGIN),
     map(action => action.payload),
     switchMap(({ username, password }) => {
-      return this.authService.authenticate(username, password).pipe(
-        tap((auth) => this.authService.login(auth)),
+      return this.authService.login(username, password).pipe(
+        tap((auth) => this.authService.saveAuth(auth)),
         map((auth) => new fromApp.LoginSuccess(auth)),
         catchError(error => of(new fromApp.LoginError(error))),
       );
@@ -42,7 +42,18 @@ export class AppEffects {
   @Effect()
   logout$ = this.actions$.pipe(
     ofType<fromApp.Logout>(fromApp.LOGOUT),
-    tap(() => this.authService.logout()),
+    switchMap(() => {
+      return this.authService.logout().pipe(
+        map(() => new fromApp.LogoutSuccess()),
+        catchError(error => of(new fromApp.LogoutError(error))),
+      );
+    }),
+  );
+
+  @Effect()
+  redirectLogout$ = this.actions$.pipe(
+    ofType(fromApp.LOGOUT_SUCCESS, fromApp.LOGOUT_SUCCESS),
+    tap(() => this.authService.removeAuth()),
     map(() => new Go({ path: ['/login'] })),
   );
 
@@ -50,13 +61,5 @@ export class AppEffects {
   setError$ = this.actions$.pipe(
     ofType<fromApp.LoginError>(fromApp.LOGIN_ERROR),
     map(action => new fromApp.SetError(action.payload)),
-  );
-
-  @Effect()
-  errorRedirect$ = this.actions$.pipe(
-    ofType<fromApp.SetError>(fromApp.SET_ERROR),
-    map(action => action.payload),
-    filter(error => error.status === 401),
-    map(() => new Go({ path: ['/login'] })),
   );
 }

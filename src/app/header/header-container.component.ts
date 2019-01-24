@@ -17,7 +17,7 @@ export class HeaderContainerComponent {
   authenticated$: Observable<boolean>;
 
   constructor(
-    private store: Store<fromStore.State>,
+    private store: Store<fromStore.NoveoState>,
     private authService: AuthService,
   ) {
     this.authenticated$ = this.authService.getAuthenticated();

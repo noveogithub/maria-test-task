@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from './reducer';
+import * as fromReducer from './reducer';
 
-export const getAppState = createFeatureSelector<AppState>('app');
+export const getAppState = createFeatureSelector<fromReducer.AppState>('app');
 
 export const geAuth = createSelector(
   getAppState,
@@ -18,7 +18,4 @@ export const getUserId = createSelector(
   state => state.userId,
 )
 
-export const getAppError = createSelector(
-  getAppState,
-  state => state.error,
-)
+export const getNotifications = createSelector(getAppState, fromReducer.selectAll);

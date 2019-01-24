@@ -16,16 +16,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  authenticate(username: string, password: string) {
+  login(username: string, password: string) {
     return this.http.post<Auth>(`${environment.apiUrl}/api/Users/login`, { username, password });
   }
 
-  login(auth: Auth): void {
+  logout() {
+    return this.http.post<Auth>(`${environment.apiUrl}/api/Users/logout`, {});
+  }
+
+  saveAuth(auth: Auth): void {
     localStorage.setItem(this._key, JSON.stringify(auth));
     this._auth$.next(auth);
   }
 
-  logout(): void {
+  removeAuth(): void {
     localStorage.removeItem(this._key);
     this._auth$.next(null);
   }

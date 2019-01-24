@@ -1,7 +1,7 @@
 <div class="container noveo-call noveo-spacer noveo-spacer--bottom-m noveo-spacer--top-s">
   <div class="noveo-spacer noveo-spacer--bottom-s">
     <a href="/calls"
-      routerLink="../"><strong>&lt; Back to calls list</strong></a>
+      routerLink="../"><strong>&lt; Back to calls</strong></a>
   </div>
 
   <div class="noveo-loader noveo-loader--theme-secondary noveo-loader--l"
@@ -19,7 +19,7 @@
     <div><strong>Wait:</strong> {{ call?.waitDuration | duration }}</div>
     <div><strong>Talk:</strong> {{ call?.talkDuration | duration }}</div>
 
-    <h2 class="title title--s noveo-spacer noveo-spacer--top-s">Wrapup</h2>
+    <h2 class="title title--s noveo-spacer noveo-spacer--top-s">Wrapups</h2>
     <ul *ngIf="call"
       class="noveo-call__wrapup">
       <li *ngFor="let wrapup of call.callWrapups">

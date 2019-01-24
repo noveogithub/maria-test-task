@@ -3,13 +3,13 @@ import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { appReducer, AppState } from './app/reducer';
 import { callsReducer, CallsState } from './calls/reducer';
 
-export interface State {
+export interface NoveoState {
   router: RouterReducerState;
   app: AppState;
   calls: CallsState;
 }
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<NoveoState> = {
   router: routerReducer,
   app: appReducer,
   calls: callsReducer,
@@ -24,4 +24,4 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   };
 }
 
-export const metaReducers: MetaReducer<State>[] = [];
+export const metaReducers: MetaReducer<NoveoState>[] = [];

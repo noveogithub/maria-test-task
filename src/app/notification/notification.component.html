@@ -1,0 +1,15 @@
+<div [@notify]="currentState"
+  class="noveo-notification">
+  <div class="noveo-notification__inner">
+
+    <div class="noveo-notification__message">
+      {{ message }}
+    </div>
+
+    <div class="noveo-notification__btn">
+      <button class="noveo-btn"
+        type="button"
+        (click)="onClose()">Ok</button>
+    </div>
+  </div>
+</div>
